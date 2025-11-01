@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic AI Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom styles for the futuristic theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #05071E; /* Deep space blue/black */
+            color: #E0E0E0;
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+
+        /* Glassmorphism effect */
+        .glassmorphic {
+            background: rgba(17, 24, 39, 0.6); /* Semi-transparent dark bg */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animated glowing effect for key elements */
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 5px #00AFFF, 0 0 10px #00AFFF, 0 0 15px #00AFFF;
+                opacity: 0.8;
+            }
+            50% {
+                box-shadow: 0 0 10px #00AFFF, 0 0 20px #00AFFF, 0 0 30px #00AFFF;
+                opacity: 1;
+            }
+        }
+        
+        .ai-glow-bar {
+            background-color: #00AFFF;
+            box-shadow: 0 0 3px #00AFFF, 0 0 5px #00AFFF;
+            animation: pulse-glow 2.5s infinite ease-in-out;
+        }
+
+        /* Scroll-triggered fade-in animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Class to be added by JS */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0; /* Start hidden */
+        }
+        
+        /* Blinking cursor for typewriter effect */
+        .typewriter-cursor {
+            color: #00AFFF;
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05071E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00AFFF;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #007fbf;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Header & Navigation -->
+    <header class="glassmorphic fixed top-0 left-0 right-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo / AI Branding -->
+            <a href="#home" class="text-2xl font-black text-white">
+                <span class="text-cyan-400">AI</span>.Portfolio
+            </a>
+            
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Home</a>
+                <a href="#projects" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Projects</a>
+                <a href="#skills" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Matrix</a>
+                <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition-colors duration-300">Contact</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white" aria-label="Open menu">
+                <!-- Menu Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 glassmorphic">
+            <a href="#home" class="block text-center py-3 px-6 text-gray-300 hover:text-cyan-400 transition-colors duration-300">Home</a>
+            <a href="#projects" class="block text-center py-3 px-6 text-gray-300 hover:text-cyan-400 transition-colors duration-300">Projects</a>
+            <a href="#skills" class="block text-center py-3 px-6 text-gray-300 hover:text-cyan-400 transition-colors duration-300">Matrix</a>
+            <a href="#contact" class="block text-center py-3 px-6 text-gray-300 hover:text-cyan-400 transition-colors duration-300">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6">
+
+        <!-- Section 1: Hero -->
+        <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center pt-20">
+            <!-- AI Typewriter Greeting -->
+            <div class="h-8 mb-4">
+                <p class="text-lg text-cyan-400">
+                    <span id="typewriter-text"></span><span class="typewriter-cursor">|</span>
+                </p>
+            </div>
+            
+            <!-- Main Headline -->
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight mb-4">
+                Future-Forward
+                <span class="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">
+                    Digital Architect
+                </span>
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8">
+                [Your Name Here] — Crafting tomorrow's web experiences with AI-integrated design and precision engineering.
+            </p>
+            
+            <!-- Call to Action Button -->
+            <a href="#projects" class="bg-cyan-500 text-white font-bold py-3 px-8 rounded-lg text-lg
+                hover:bg-cyan-400 transition-all duration-300
+                shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-400/50
+                transform hover:-translate-y-1">
+                Analyze My Work
+            </a>
+        </section>
+
+        <!-- Section 2: AI-Assessed Projects -->
+        <section id="projects" class="py-24">
+            <div class="text-center mb-16 opacity-0 animate-on-scroll">
+                <h2 class="text-4xl font-bold text-white mb-3">Project Nexus</h2>
+                <p class="text-lg text-cyan-400">AI-Assessed Case Studies</p>
+            </div>
+
+            <!-- Project Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1 -->
+                <div class="glassmorphic rounded-2xl overflow-hidden shadow-2xl shadow-black/30 
+                            border border-cyan-500/20 transform hover:-translate-y-2 transition-transform duration-300
+                            opacity-0 animate-on-scroll" style="animation-delay: 0.1s;">
+                    <img src="https://placehold.co/600x400/0A0C24/00AFFF?text=Project+Alpha" 
+                         alt="Project Alpha" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">Project Alpha</h3>
+                        <p class="text-gray-400 mb-4">AI-driven e-commerce platform with predictive user recommendations.</p>
+                        
+                        <!-- AI Analysis -->
+                        <div class="mb-3">
+                            <span class="text-cyan-400 text-sm font-semibold">AI-Assessed Impact: 97.2%</span>
+                            <div class="w-full bg-gray-700 rounded-full h-2.5 mt-1">
+                                <div class="ai-glow-bar h-2.5 rounded-full" style="width: 97.2%"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="text-cyan-400 font-medium hover:text-white transition-colors duration-300">View Analysis &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="glassmorphic rounded-2xl overflow-hidden shadow-2xl shadow-black/30
+                            border border-cyan-500/20 transform hover:-translate-y-2 transition-transform duration-300
+                            opacity-0 animate-on-scroll" style="animation-delay: 0.2s;">
+                    <img src="https://placehold.co/600x400/0A0C24/8A2BE2?text=Project+Beta" 
+                         alt="Project Beta" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">Project Beta</h3>
+                        <p class="text-gray-400 mb-4">Real-time data visualization dashboard for neural network monitoring.</p>
+                        
+                        <!-- AI Analysis -->
+                        <div class="mb-3">
+                            <span class="text-purple-400 text-sm font-semibold">AI-Assessed Scalability: 94.5%</span>
+                            <div class="w-full bg-gray-700 rounded-full h-2.5 mt-1">
+                                <div class="h-2.5 rounded-full" style="width: 94.5%; background-color: #8A2BE2; box-shadow: 0 0 5px #8A2BE2;"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="text-purple-400 font-medium hover:text-white transition-colors duration-300">View Analysis &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="glassmorphic rounded-2xl overflow-hidden shadow-2xl shadow-black/30
+                            border border-cyan-500/20 transform hover:-translate-y-2 transition-transform duration-300
+                            opacity-0 animate-on-scroll" style="animation-delay: 0.3s;">
+                    <img src="https://placehold.co/600x400/0A0C24/00AFFF?text=Project+Gamma" 
+                         alt="Project Gamma" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">Project Gamma</h3>
+                        <p class="text-gray-400 mb-4">Generative art installation powered by user emotional input.</p>
+                        
+                        <!-- AI Analysis -->
+                        <div class="mb-3">
+                            <span class="text-cyan-400 text-sm font-semibold">AI-Assessed Innovation: 98.9%</span>
+                            <div class="w-full bg-gray-700 rounded-full h-2.5 mt-1">
+                                <div class="ai-glow-bar h-2.5 rounded-full" style="width: 98.9%"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="text-cyan-400 font-medium hover:text-white transition-colors duration-300">View Analysis &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section 3: Skills Matrix -->
+        <section id="skills" class="py-24">
+            <div class="text-center mb-16 opacity-0 animate-on-scroll">
+                <h2 class="text-4xl font-bold text-white mb-3">Cognitive Matrix</h2>
+                <p class="text-lg text-cyan-400">Core Competency Nodes</p>
+            </div>
+
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Skill Category 1: AI & ML -->
+                <div class="glassmorphic rounded-2xl p-6 opacity-0 animate-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="flex items-center mb-4">
+                        <!-- AI Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-cyan-400 mr-3">
+                            <path d="M12 8V4H8"></path><rect x="4" y="12" width="4" height="8"></rect><path d="M12 20v-4h4"></path><rect x="16" y="12" width="4" height="8"></rect><path d="M12 12v4H8"></path><rect x="4" y="4" width="4" height="8"></rect><path d="M12 12v-4h4"></path><rect x="16" y="4" width="4" height="8"></rect>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-white">AI & ML</h3>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">TensorFlow / PyTorch</li>
+                        <li class="text-gray-300">Natural Language Processing</li>
+                        <li class="text-gray-300">Generative Models</li>
+                        <li class="text-gray-300">Computer Vision</li>
+                    </ul>
+                </div>
+                
+                <!-- Skill Category 2: Frontend -->
+                <div class="glassmorphic rounded-2xl p-6 opacity-0 animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="flex items-center mb-4">
+                        <!-- Code Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-cyan-400 mr-3">
+                            <polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-white">Frontend Dev</h3>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">React / Next.js</li>
+                        <li class="text-gray-300">Three.js / WebGL</li>
+                        <li class="text-gray-300">Tailwind CSS</li>
+                        <li class="text-gray-300">Web Performance</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Category 3: Backend -->
+                <div class="glassmorphic rounded-2xl p-6 opacity-0 animate-on-scroll" style="animation-delay: 0.3s;">
+                    <div class="flex items-center mb-4">
+                        <!-- Database Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-cyan-400 mr-3">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-white">Backend & Infra</h3>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">Node.js / Python</li>
+                        <li class="text-gray-300">Kubernetes / Docker</li>
+                        <li class="text-gray-300">PostgreSQL / Vector DBs</li>
+                        <li class="text-gray-300">Serverless & Edge</li>
+                    </ul>
+                </div>
+                
+                <!-- Skill Category 4: Design -->
+                <div class="glassmorphic rounded-2xl p-6 opacity-0 animate-on-scroll" style="animation-delay: 0.4s;">
+                    <div class="flex items-center mb-4">
+                        <!-- Pen Tool Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-cyan-400 mr-3">
+                            <path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-1.5"></path><path d="M6 9l-3 3 7 7 3-3"></path><path d="M3 15l-1.5-1.5"></path><path d="M15 3l-3 3 7 7 3-3"></path><path d="M9 6l-1.5-1.5"></path>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-white">UX/UI Design</h3>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">AI-First UX</li>
+                        <li class="text-gray-300">Human-AI Interaction</li>
+                        <li class="text-gray-300">Figma</li>
+                        <li class="text-gray-300">3D Prototyping</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section 4: Contact Form -->
+        <section id="contact" class="py-24">
+            <div class="max-w-3xl mx-auto text-center opacity-0 animate-on-scroll">
+                <h2 class="text-4xl font-bold text-white mb-3">Initiate Contact</h2>
+                <p class="text-lg text-cyan-400 mb-8">AI-Powered Inquiry Routing</p>
+                
+                <form class="glassmorphic rounded-2xl p-8 md:p-12 shadow-2xl shadow-black/30 text-left">
+                    <p class="text-center text-gray-300 mb-6">My integrated assistant will analyze your request for priority and context. Please provide all relevant data.</p>
+                    
+                    <div class="mb-6">
+                        <label for="name" class="block text-sm font-medium text-cyan-400 mb-2">Full Name / Handle</label>
+                        <input type="text" id="name" class="w-full bg-gray-900/70 border border-gray-700 text-white
+                            rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cyan-500
+                            transition-all duration-300" 
+                            placeholder="e.g., Jane 'Binary' Doe">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="email" class="block text-sm font-medium text-cyan-400 mb-2">Email Address</label>
+                        <input type="email" id="email" class="w-full bg-gray-900/70 border border-gray-700 text-white
+                            rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cyan-500
+                            transition-all duration-300" 
+                            placeholder="jane.doe@protocol.ai">
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="message" class="block text-sm font-medium text-cyan-400 mb-2">Message / Inquiry Data</label>
+                        <textarea id="message" rows="6" class="w-full bg-gray-900/70 border border-gray-700 text-white
+                            rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cyan-500
+                            transition-all duration-300" 
+                            placeholder="Describe your project, objective, or query..."></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="bg-cyan-500 text-white font-bold py-3 px-10 rounded-lg text-lg
+                            hover:bg-cyan-400 transition-all duration-300
+                            shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-400/50
+                            transform hover:-translate-y-1">
+                            Transmit Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-cyan-500/20 mt-24">
+        <div class="container mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div class="mb-4 md:mb-0">
+                <p class="text-gray-400">&copy; <span id="current-year"></span> [Your Name]. All rights reserved.</p>
+                <p class="text-sm text-gray-500">AI Interface v3.0 - System Operational</p>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="flex space-x-6">
+                <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300" aria-label="GitHub">
+                    <!-- GitHub Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                        <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6c0 -1.3 -.5 -2.4 -1.3 -3.2c.1 -.3 .5 -1.5 0 -3.2c0 0 -1.1 -.4 -3.5 1.3c-1 -.3 -2.1 -.4 -3.2 -.4s-2.2 .1 -3.2 .4C6.3 3.9 5.2 4.2 5.2 4.2c-.5 1.7 -.1 2.9 0 3.2c-.8 .8 -1.3 1.9 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .5 -1 1.4 -1 2.8v4"></path>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300" aria-label="LinkedIn">
+                    <!-- LinkedIn Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0 -2 -2s-2 0 -2 2v7h-4v-7a6 6 0 0 1 6 -6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- Mobile Menu Toggle ---
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- AI Typewriter Effect ---
+            const typewriterElement = document.getElementById('typewriter-text');
+            const greeting = "Initializing... Greetings, Visitor. System: P.A.I.G.E. (Personal AI Guide & Experience).";
+            let charIndex = 0;
+
+            function typeWriter() {
+                if (charIndex < greeting.length) {
+                    typewriterElement.textContent += greeting.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, 50 + (Math.random() * 50));
+                }
+            }
+            // Start after a short delay
+            setTimeout(typeWriter, 1000);
+
+            // --- Scroll-Triggered Animations ---
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Use a custom class 'fade-in-up'
+                        entry.target.classList.add('fade-in-up');
+                        entry.target.classList.remove('opacity-0');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            // Target all elements with the 'animate-on-scroll' class
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+
+            // --- Set Current Year in Footer ---
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        });
+    </script>
+
+</body>
+</html>
